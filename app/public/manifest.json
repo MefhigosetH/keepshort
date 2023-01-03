@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Shortube",
+  "name": "Download Youtube Short videos",
   "icons": [
     {
       "src": "favicon.ico",
