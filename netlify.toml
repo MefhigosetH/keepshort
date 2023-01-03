@@ -1,6 +1,7 @@
 [build]
   base = "app/"
   publish = "build/"
+  command = "npm run build"
 
 [[redirects]]
   from = '/api/*'
