@@ -1,0 +1,24 @@
+version: "3"
+
+networks:
+  lan:
+
+services:
+  keepshort:
+    image: node:18-alpine
+    container_name: keepshort
+    working_dir: /usr/src
+    command: ["npm", "start"]
+    environment:
+      NODE_ENV: development
+      REACT_APP_MAPBOX_TOKEN: ${REACT_APP_MAPBOX_TOKEN}
+      FT_AWS_ACCESS_KEY_ID: ${FT_AWS_ACCESS_KEY_ID}
+      FT_AWS_SECRET_ACCESS_KEY: ${FT_AWS_SECRET_ACCESS_KEY}
+      FT_AWS_REGION: ${FT_AWS_REGION}
+    networks:
+      - lan
+    ports:
+      - "3000:3000"
+      - "8888:8888"
+    volumes:
+      - ./app:/usr/src/

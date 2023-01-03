@@ -1,0 +1,4 @@
+package-lock.json
+Pipfile.lock
+node_modules
+.env
