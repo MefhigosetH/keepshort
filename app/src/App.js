@@ -5,6 +5,16 @@ import { blue, lime } from '@mui/material/colors';
 
 class App extends React.Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ytLink: '',
+      isLoading: false,
+      response: {},
+    };
+  }
+
   appTheme = createTheme({
     palette: {
       primary: lime,
@@ -41,10 +51,12 @@ class App extends React.Component {
                 label="Youtube Short link here"
                 id="YoutubeLink"
                 variant="filled"
+                onChange={(e) => this.setState({ytLink: e.target.value})}
                 sx={{ mt: "2em", mb: "1em" }} />
 
                 <Button
                   fullWidth
+                  onClick={() => console.log(this.state.ytLink)}
                   variant="outlined"
                   size="large">
                     Buscar
