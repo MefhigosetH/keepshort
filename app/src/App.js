@@ -1,5 +1,5 @@
 import NavBar from './components/NavBar.js'
-import { Box, Button, CircularProgress, Container, createTheme, CssBaseline, TextField, ThemeProvider } from '@mui/material';
+import { Box, Button, CircularProgress, Container, createTheme, CssBaseline, TextField, ThemeProvider, Typography } from '@mui/material';
 import React from 'react';
 import { blue, lime } from '@mui/material/colors';
 
@@ -11,6 +11,7 @@ class App extends React.Component {
     this.state = {
       ytLink: '',
       isLoading: false,
+      isReady: false,
       response: {},
     };
   }
@@ -50,6 +51,12 @@ class App extends React.Component {
             <Container
               fixed
               sx={{ pb:"3em" }}>
+
+              <Typography
+                variant='h2'
+                sx={{ textAlign: 'center', textShadow: '2px 2px #000' }}>
+                Youtube Shorts video downloader
+              </Typography>
 
               <TextField
                 fullWidth
