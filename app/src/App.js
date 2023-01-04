@@ -15,6 +15,11 @@ class App extends React.Component {
     };
   }
 
+  searchLink( url ) {
+    console.log(url);
+    this.setState({isLoading: true});
+  }
+
   appTheme = createTheme({
     palette: {
       primary: lime,
@@ -24,7 +29,7 @@ class App extends React.Component {
 
   loaderStyle = {
     width: '100%',
-    height: '70vh',
+    height: '50vh',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
@@ -56,7 +61,7 @@ class App extends React.Component {
 
                 <Button
                   fullWidth
-                  onClick={() => console.log(this.state.ytLink)}
+                  onClick={() => this.searchLink(this.state.ytLink)}
                   variant="outlined"
                   size="large">
                     Buscar
@@ -64,7 +69,9 @@ class App extends React.Component {
             </Container>
           </Box>
 
-          <div style={this.loaderStyle}><CircularProgress /></div>
+          { this.state.isLoading &&
+            <div style={this.loaderStyle}><CircularProgress /></div>
+          }
 
         </ThemeProvider>
     );
