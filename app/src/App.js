@@ -16,9 +16,18 @@ class App extends React.Component {
     };
   }
 
-  searchLink( url ) {
-    console.log(url);
+  async searchLink( linkUrl ) {
+    console.log( linkUrl );
     this.setState({isLoading: true});
+
+    var API_URL = '/api';
+
+    if( process.env.NODE_ENV === 'development' ){
+      API_URL = "http://localhost:8888/.netlify/functions";
+    }
+
+    const response = await fetch( API_URL + "/parselink" );
+    console.log( await response.text() );
   }
 
   appTheme = createTheme({
