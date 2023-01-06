@@ -1,7 +1,10 @@
-import NavBar from './components/NavBar.js'
 import { Box, Button, CircularProgress, Container, createTheme, CssBaseline, TextField, ThemeProvider, Typography } from '@mui/material';
 import React from 'react';
 import { blue, lime } from '@mui/material/colors';
+
+import NavBar from './components/NavBar.js'
+import VideoCard from './components/ytCard'
+
 
 class App extends React.Component {
 
@@ -17,8 +20,7 @@ class App extends React.Component {
   }
 
   async searchLink( linkUrl ) {
-    console.log( linkUrl );
-    this.setState({isLoading: true});
+    this.setState({isReady: false, isLoading: true});
 
     var API_URL = '/api';
 
@@ -26,8 +28,14 @@ class App extends React.Component {
       API_URL = "http://localhost:8888/.netlify/functions";
     }
 
-    const response = await fetch( API_URL + "/parselink" );
-    console.log( await response.text() );
+    try {
+      const response = await fetch( API_URL + "/parselink" );
+      var jsonData = await response.json();
+    } catch(e) {
+      console.log( e );
+    }
+
+    this.setState({isLoading: false, isReady: true, response: jsonData});
   }
 
   appTheme = createTheme({
@@ -87,6 +95,10 @@ class App extends React.Component {
 
           { this.state.isLoading &&
             <div style={this.loaderStyle}><CircularProgress /></div>
+          }
+
+          { this.state.isReady &&
+            <VideoCard data={this.state.response} />
           }
 
         </ThemeProvider>
