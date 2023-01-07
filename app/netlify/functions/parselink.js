@@ -1,4 +1,5 @@
 const cheerio = require("cheerio");
+const axios = require("axios");
 
 exports.handler = async function (event, context) {
   const linkUrl = "https://www.youtube.com/shorts/1Mpac46BTrA";
@@ -10,8 +11,8 @@ exports.handler = async function (event, context) {
   };
 
   try {
-    const response = await fetch( linkUrl );
-    const body = await response.text();
+    const response = await axios.get( linkUrl );
+    const body = await response.data;
 
     const $ = cheerio.load( body );
     responseData.title = $('title').text();
