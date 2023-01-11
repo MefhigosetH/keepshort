@@ -32,6 +32,7 @@ exports.handler = async function (event, context) {
 
         const playerUrl = 'https://www.youtube.com/youtubei/v1/player?key=';
         const playerResponse = await axios.get( playerUrl + matches[1] );
+        const playerJson = await playerResponse.JSON();
       }
 
     } catch(e) {

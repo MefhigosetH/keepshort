@@ -29,7 +29,8 @@ class App extends React.Component {
     }
 
     try {
-      const response = await fetch( API_URL + "/parselink?url=" + linkUrl );
+      //const response = await fetch( API_URL + "/dl?url=" + linkUrl );
+      const response = await fetch( API_URL + "/dl" );
       var jsonData = await response.json();
     } catch(e) {
       console.log( e );
