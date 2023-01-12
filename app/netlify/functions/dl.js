@@ -1,10 +1,24 @@
 const ytdl = require("ytdl-core");
 
+
 function select_thumbnail( thumbnails ){
   let url = '';
   let elem = thumbnails.length;
 
   return thumbnails[elem - 1].url;
+}
+
+
+function select_videos( formats ){
+  var videos = [];
+
+  formats.forEach(format => {
+    if( format.hasAudio && format.hasVideo ){
+      videos.push( {'label': format.height + 'p', 'url': format.url} );
+    }
+  });
+
+  return videos;
 }
 
 exports.handler = async function (event, context) {
@@ -15,7 +29,7 @@ exports.handler = async function (event, context) {
         title: '',
         description: '',
         thumbnail: '',
-        uris: []
+        videos: []
       };
 
     if( vid != ''){
@@ -30,6 +44,9 @@ exports.handler = async function (event, context) {
         responseData.description = videoInfo.videoDetails.description ||
                                     '- Sin descripcion -';
         responseData.thumbnail = select_thumbnail( videoInfo.videoDetails.thumbnails );
+        //responseData.videos.push( select_videos( videoInfo.formats ) );
+        //console.log( select_videos( videoInfo.formats ) );
+        responseData.videos = select_videos( videoInfo.formats );
     }
 
     return {

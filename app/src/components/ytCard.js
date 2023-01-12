@@ -6,6 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 
 export default class ytCard extends React.Component {
 
@@ -15,9 +16,7 @@ export default class ytCard extends React.Component {
     }
 
     render() {
-        const data = this.props.data || false;
-
-        console.log( data );
+        const {data} = this.props;
 
         return (
             <Container sx={{mt: '2em'}}>
@@ -36,7 +35,17 @@ export default class ytCard extends React.Component {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="large" color='primary' variant='contained'>360p</Button>
+      { data.responseData.videos.map((video) =>
+        <Button
+          size="large"
+          color='primary'
+          variant='contained'
+          startIcon={<CloudDownloadIcon/>}
+          href={video.url}
+          key={video.label}>
+          {video.label}
+        </Button>
+      )}
       </CardActions>
     </Card>
     </Container>
