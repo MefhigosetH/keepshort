@@ -21,6 +21,20 @@ function select_videos( formats ){
   return videos;
 }
 
+
+function select_audios( formats ){
+  var audios = [];
+
+  formats.forEach(format => {
+    if( format.hasAudio && !format.hasVideo ){
+      audios.push( {'label': format.audioBitrate, 'url': format.url} );
+    }
+  });
+
+  return audios;
+}
+
+
 exports.handler = async function (event, context) {
     const vid = event.queryStringParameters.url || 'Rp9-LAksZwU';
     const base_url = 'https://www.youtube.com/embed/';
@@ -36,7 +50,8 @@ exports.handler = async function (event, context) {
         title: '',
         description: '',
         thumbnail: '',
-        videos: []
+        videos: [],
+        audios: []
       };
 
     if( vid != ''){
@@ -54,6 +69,7 @@ exports.handler = async function (event, context) {
         //responseData.videos.push( select_videos( videoInfo.formats ) );
         //console.log( select_videos( videoInfo.formats ) );
         responseData.videos = select_videos( videoInfo.formats );
+        responseData.audios = select_audios( videoInfo.formats );
     }
 
     return {
