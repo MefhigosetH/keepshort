@@ -24,7 +24,15 @@ function select_videos( formats ){
 exports.handler = async function (event, context) {
     const vid = event.queryStringParameters.url || 'Rp9-LAksZwU';
     const base_url = 'https://www.youtube.com/embed/';
-
+    const origin = '*';
+    console.log( process.env );
+/*
+    if( process.env.NODE_ENV === 'development' ){
+      origin = '*'
+    } else {
+      origin = 'https://shortube.netlify.app'
+    }
+*/
     var responseData = {
         title: '',
         description: '',
@@ -52,7 +60,7 @@ exports.handler = async function (event, context) {
     return {
         statusCode: 200,
         headers: {
-          "access-control-allow-origin": "*",
+          "access-control-allow-origin": origin,
         },
         body: JSON.stringify({ responseData }),
       };
