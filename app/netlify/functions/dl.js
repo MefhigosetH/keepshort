@@ -25,8 +25,8 @@ exports.handler = async function (event, context) {
     const vid = event.queryStringParameters.url || 'Rp9-LAksZwU';
     const base_url = 'https://www.youtube.com/embed/';
     const origin = 'https://' + event.headers.host;
-    console.log( process.env );
-    console.log( event )
+    //console.log( process.env );
+    //console.log( event )
 
     if( process.env.NODE_ENV === 'development' ){
       origin = '*'
