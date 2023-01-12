@@ -22,21 +22,30 @@ class App extends React.Component {
   async searchLink( linkUrl ) {
     this.setState({isReady: false, isLoading: true});
 
-    var API_URL = '/api';
+    let regex = /https:\/\/(?:www.)*youtu(?:be.com|.be)\/(?:shorts\/|watch\?v=)?([\w\d-]+)/;
+    let matches = linkUrl.match( regex );
 
-    if( process.env.NODE_ENV === 'development' ){
-      API_URL = "http://localhost:8888/.netlify/functions";
+    if( matches != null && matches.length === 2 ){
+
+      var vid = matches[1];
+
+      var API_URL = '/api';
+
+      if( process.env.NODE_ENV === 'development' ){
+        API_URL = "http://localhost:8888/.netlify/functions";
+      }
+
+      try {
+        const response = await fetch( API_URL + "/dl?url=" + vid );
+        var jsonData = await response.json();
+      } catch(e) {
+        console.log( e );
+      }
+
+      this.setState({isLoading: false, isReady: true, response: jsonData});
+    } else {
+      this.setState({isReady: false, isLoading: false});
     }
-
-    try {
-      //const response = await fetch( API_URL + "/dl?url=" + linkUrl );
-      const response = await fetch( API_URL + "/dl" );
-      var jsonData = await response.json();
-    } catch(e) {
-      console.log( e );
-    }
-
-    this.setState({isLoading: false, isReady: true, response: jsonData});
   }
 
   appTheme = createTheme({

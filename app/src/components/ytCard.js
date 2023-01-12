@@ -36,7 +36,7 @@ export default class ytCard extends React.Component {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="large" color='secondary'>MP4@360p</Button>
+        <Button size="large" color='primary' variant='contained'>360p</Button>
       </CardActions>
     </Card>
     </Container>
