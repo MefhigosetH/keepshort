@@ -24,16 +24,14 @@ function select_videos( formats ){
 exports.handler = async function (event, context) {
     const vid = event.queryStringParameters.url || 'Rp9-LAksZwU';
     const base_url = 'https://www.youtube.com/embed/';
-    const origin = '*';
+    const origin = 'https://' + event.headers.host;
     console.log( process.env );
     console.log( event )
-/*
+
     if( process.env.NODE_ENV === 'development' ){
       origin = '*'
-    } else {
-      origin = 'https://shortube.netlify.app'
     }
-*/
+
     var responseData = {
         title: '',
         description: '',
