@@ -118,7 +118,7 @@ class App extends React.Component {
             <Typography
               variant='p'
               sx={{ textAlign: 'center', display: 'block', color: "#fff", background: "linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(25,0,255,1) 100%)", py: "1em" }}>
-                Desarrollado con &#128420; por Victor Villarreal
+                Desarrollado con &#129293; por Victor Villarreal
             </Typography>
           </Paper>
 
