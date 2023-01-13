@@ -19,7 +19,7 @@ export default class ytCard extends React.Component {
         const {data} = this.props;
 
         return (
-            <Container sx={{mt: '2em'}}>
+            <Container sx={{mt: '2em', mb: '5em'}}>
             <Card>
       <CardMedia
         sx={{ height: 480 }}
@@ -43,7 +43,18 @@ export default class ytCard extends React.Component {
           startIcon={<CloudDownloadIcon/>}
           href={video.url}
           key={video.label}>
-          {video.label}
+          Video {video.label} ({video.container})
+        </Button>
+      )}
+      { data.responseData.audios.map((audio) =>
+        <Button
+          size="large"
+          color='primary'
+          variant='contained'
+          startIcon={<CloudDownloadIcon/>}
+          href={audio.url}
+          key={audio.label}>
+          Audio {audio.label} ({audio.container})
         </Button>
       )}
       </CardActions>

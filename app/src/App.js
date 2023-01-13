@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, Container, createTheme, CssBaseline, TextField, ThemeProvider, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Container, createTheme, CssBaseline, Paper, TextField, ThemeProvider, Typography } from '@mui/material';
 import React from 'react';
 import { blue, lime } from '@mui/material/colors';
 
@@ -110,6 +110,17 @@ class App extends React.Component {
           { this.state.isReady &&
             <VideoCard data={this.state.response} />
           }
+
+          <Paper
+            elevation={3}
+            sx={{ width: '100%', position: 'fixed', bottom: 0 }}>
+
+            <Typography
+              variant='p'
+              sx={{ textAlign: 'center', display: 'block', color: "#fff", background: "linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(25,0,255,1) 100%)", py: "1em" }}>
+                Desarrollado con &#128420; por Victor Villarreal
+            </Typography>
+          </Paper>
 
         </ThemeProvider>
     );

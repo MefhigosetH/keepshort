@@ -14,7 +14,11 @@ function select_videos( formats ){
 
   formats.forEach(format => {
     if( format.hasAudio && format.hasVideo ){
-      videos.push( {'label': format.height + 'p', 'url': format.url} );
+      videos.push({
+        'label': format.height + 'p',
+        'url': format.url,
+        'container': format.container
+      });
     }
   });
 
@@ -26,8 +30,12 @@ function select_audios( formats ){
   var audios = [];
 
   formats.forEach(format => {
-    if( format.hasAudio && !format.hasVideo ){
-      audios.push( {'label': format.audioBitrate, 'url': format.url} );
+    if( format.hasAudio && !format.hasVideo && format.container != 'webm' ){
+      audios.push({
+        'label': format.audioBitrate,
+        'url': format.url,
+        'container': format.container
+      });
     }
   });
 
@@ -38,7 +46,7 @@ function select_audios( formats ){
 exports.handler = async function (event, context) {
     const vid = event.queryStringParameters.url || 'Rp9-LAksZwU';
     const base_url = 'https://www.youtube.com/embed/';
-    const origin = 'https://' + event.headers.host;
+    let origin = 'https://' + event.headers.host;
     //console.log( process.env );
     //console.log( event )
 
