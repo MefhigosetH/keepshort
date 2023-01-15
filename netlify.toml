@@ -3,6 +3,9 @@
   publish = "build/"
   command = "npm run build"
 
+[context.deploy-preview.environment]
+  NODE_ENV = "staging"
+
 [[redirects]]
   from = '/api/*'
   to = '/.netlify/functions/:splat'
